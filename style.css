@@ -1,0 +1,49 @@
+
+/* ===== Base ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#111;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Pretendard",system-ui,sans-serif}
+a{text-decoration:none;color:inherit}
+.header{
+  position:fixed;top:0;left:0;width:100%;
+  padding:20px 40px;display:flex;justify-content:space-between;align-items:center;
+  background:#111;z-index:100;
+}
+.logo img{height:60px;display:block}
+.nav{display:flex;gap:32px;font-size:14px;letter-spacing:.5px}
+.nav a{color:#bcbcbc;transition:color .2s ease}
+.nav a:hover,.nav a.active{color:#fff}
+
+/* Top hero slider (main only) */
+.hero{margin-top:120px;width:100%;position:relative;overflow:hidden}
+.hero-slider{position:relative;width:100%;height:720px;max-width:1920px;margin:0 auto}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+.hero-slide.active{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-control{position:absolute;top:0;bottom:0;width:18%;cursor:pointer;z-index:2}
+.hero-control.prev{left:0}.hero-control.next{right:0}
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:32px;color:rgba(255,255,255,.7);pointer-events:none}
+.hero-control.prev .hero-arrow{left:20px}
+.hero-control.next .hero-arrow{right:20px}
+
+/* Canvas scaling wrapper */
+.page-wrapper{padding-top:120px}
+.stage{width:100%;max-width:1920px;margin:0 auto;position:relative}
+.canvas{
+  position:relative;
+  width:1920px; /* design width */
+  transform-origin: top left;
+}
+.thumb{
+  position:absolute;display:block;
+}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Scroll-to-top button */
+.scroll-top-btn{
+  position:fixed;right:24px;bottom:24px;width:40px;height:40px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.5);background:rgba(17,17,17,.7);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;
+  backdrop-filter:blur(6px);transition:background-color .2s ease, transform .15s ease;
+}
+.scroll-top-btn:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.scroll-top-btn span{font-size:18px}
