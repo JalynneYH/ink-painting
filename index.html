@@ -10,31 +10,33 @@
 
   <!-- ✅ 페이지별 좌표 CSS (canvas height만 최적화해서 footer 위 여백 줄임) -->
   <style>
-    /* ✅ 마지막 썸네일(t21) 기준으로 캔버스 높이를 줄여 footer가 과하게 내려가지 않게 조정 */
-    .canvas.ink-canvas{height:7975px}
+  .canvas.ink-canvas{
+    height:8250px; /* 메인 페이지와 동일한 footer 간격 */
+  }
 
-    .ink-canvas .t01{left:45.0px;top:263.0px;width:1428.0px;height:1076.0px;}
-    .ink-canvas .t02{left:545.0px;top:1376.0px;width:1310.0px;height:710.0px;}
-    .ink-canvas .t03{left:384.0px;top:2123.0px;width:322.245px;height:586.378px;}
-    .ink-canvas .t04{left:760.0px;top:2746.0px;width:439.783px;height:586.378px;}
-    .ink-canvas .t05{left:113.0px;top:3369.0px;width:1087.0px;height:548.0px;}
-    .ink-canvas .t06{left:1228.0px;top:3955.0px;width:627.0px;height:877.221px;}
-    .ink-canvas .t07{left:1228.0px;top:3643.0px;width:255.738px;height:274.0px;}
-    .ink-canvas .t08{left:706.0px;top:4449.65px;width:493.973px;height:382.419px;}
-    .ink-canvas .t09{left:1542.0px;top:4872.0px;width:313.393px;height:400.768px;}
-    .ink-canvas .t10{left:1149.0px;top:5313.0px;width:392.821px;height:293.657px;}
-    .ink-canvas .t11{left:980.0px;top:5066.67px;width:295.631px;height:206.422px;}
-    .ink-canvas .t12{left:657.0px;top:5607.0px;width:452.218px;height:575.244px;}
-    .ink-canvas .t13{left:1149.0px;top:6231.0px;width:262.794px;height:180.093px;}
-    .ink-canvas .t14{left:258.0px;top:6503.0px;width:695.0px;height:496.477px;}
-    .ink-canvas .t15{left:980.0px;top:6800.0px;width:175.915px;height:198.717px;}
-    .ink-canvas .t16{left:980.0px;top:7031.0px;width:268.363px;height:198.717px;}
-    .ink-canvas .t17{left:685.0px;top:7267.0px;width:268.363px;height:184.172px;}
-    .ink-canvas .t18{left:1587.0px;top:7543.0px;width:268.363px;height:177.096px;}
-    .ink-canvas .t19{left:113.0px;top:8069.0px;width:261.027px;height:184.172px;}
-    .ink-canvas .t20{left:366.621px;top:8070.57px;width:268.363px;height:181.027px;}
-    .ink-canvas .t21{left:1706.64px;top:7791.0px;width:148.0px;height:106.0px;}
-  </style>
+  .ink-canvas .t01{left:45.0px;top:263.0px;width:1428.0px;height:1076.0px;}
+  .ink-canvas .t02{left:545.0px;top:1376.0px;width:1310.0px;height:710.0px;}
+  .ink-canvas .t03{left:384.0px;top:2123.0px;width:322.245px;height:586.378px;}
+  .ink-canvas .t04{left:760.0px;top:2746.0px;width:439.783px;height:586.378px;}
+  .ink-canvas .t05{left:113.0px;top:3369.0px;width:1087.0px;height:548.0px;}
+  .ink-canvas .t06{left:1228.0px;top:3955.0px;width:627.0px;height:877.221px;}
+  .ink-canvas .t07{left:1228.0px;top:3643.0px;width:255.738px;height:274.0px;}
+  .ink-canvas .t08{left:706.0px;top:4449.65px;width:493.973px;height:382.419px;}
+  .ink-canvas .t09{left:1542.0px;top:4872.0px;width:313.393px;height:400.768px;}
+  .ink-canvas .t10{left:1149.0px;top:5313.0px;width:392.821px;height:293.657px;}
+  .ink-canvas .t11{left:980.0px;top:5066.67px;width:295.631px;height:206.422px;}
+  .ink-canvas .t12{left:657.0px;top:5607.0px;width:452.218px;height:575.244px;}
+  .ink-canvas .t13{left:1149.0px;top:6231.0px;width:262.794px;height:180.093px;}
+  .ink-canvas .t14{left:258.0px;top:6503.0px;width:695.0px;height:496.477px;}
+  .ink-canvas .t15{left:980.0px;top:6800.0px;width:175.915px;height:198.717px;}
+  .ink-canvas .t16{left:980.0px;top:7031.0px;width:268.363px;height:198.717px;}
+  .ink-canvas .t17{left:685.0px;top:7267.0px;width:268.363px;height:184.172px;}
+  .ink-canvas .t18{left:1587.0px;top:7543.0px;width:268.363px;height:177.096px;}
+  .ink-canvas .t19{left:113.0px;top:8069.0px;width:261.027px;height:184.172px;}
+  .ink-canvas .t20{left:366.621px;top:8070.57px;width:268.363px;height:181.027px;}
+  .ink-canvas .t21{left:1706.64px;top:7791.0px;width:148.0px;height:106.0px;}
+</style>
+
 </head>
 
 <body>
