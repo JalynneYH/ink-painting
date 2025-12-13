@@ -14,19 +14,12 @@ body {
 
 a { color: inherit; text-decoration: none; }
 
-img {
-  -webkit-user-drag: none;
-  user-select: none;
-}
-
 /* =================================================
    HEADER / NAVIGATION
 ================================================= */
 .header {
-  width: 1920px;
-  max-width: 100%;
+  width: 100%;
   height: 90px;
-  margin: 0 auto;
   padding: 0 48px;
   display: flex;
   align-items: center;
@@ -34,10 +27,11 @@ img {
 }
 
 .logo img {
-  height: 42px;
+  height: 54px;            /* ✅ 로고 조금 크게 */
   display: block;
 }
 
+/* 네비게이션 메뉴 */
 .nav {
   display: flex;
   gap: 28px;
@@ -47,7 +41,7 @@ img {
   font-size: 12px;
   letter-spacing: 0.08em;
   color: #8c8c8c;
-  transition: color 0.25s ease;
+  transition: color 0.3s ease;
 }
 
 .nav a:hover,
@@ -56,8 +50,53 @@ img {
 }
 
 /* =================================================
-   HERO / SLIDER (메인에서만 사용)
-   - 다른 페이지에 있어도 문제 없게 스타일만 공용으로 둠
+   RESPONSIVE SCALE (1920 기준 스케일)
+   - 캔버스(썸네일 좌표) 레이아웃 깨짐 방지 핵심
+================================================= */
+:root { --scale: 1; }
+
+.stage {
+  margin-top: 60px;
+}
+
+.scaled-stage {
+  width: 1920px;
+  margin: 0 auto;
+  transform-origin: top center;
+  transform: scale(var(--scale));
+}
+
+/* 캔버스는 항상 "좌표 기준(1920)" 유지 */
+.canvas {
+  position: relative;
+  width: 1920px;
+  margin: 0 auto;
+}
+
+/* =================================================
+   THUMBNAILS (공통)
+================================================= */
+.thumb {
+  position: absolute;
+  overflow: hidden;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+/* ✅ 썸네일 hover 통일 */
+.thumb:hover img {
+  transform: scale(1.04);
+  opacity: 0.75;
+}
+
+/* =================================================
+   HERO / SLIDER (메인에만 존재해도 공용으로 둠)
 ================================================= */
 .hero {
   position: relative;
@@ -70,12 +109,13 @@ img {
   height: 90vh;
 }
 
+/* ✅ 페이드 전환 */
 .hero .slide {
   position: absolute;
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1.2s ease-in-out; /* 페이드 속도 */
+  transition: opacity 1.2s ease-in-out; /* ✅ 페이드 속도 */
 }
 
 .hero .slide.active {
@@ -104,51 +144,21 @@ img {
 .hero-control.prev { left: 0; }
 .hero-control.next { right: 0; }
 
+/* 화살표 */
 .hero-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   font-size: 40px;
   opacity: 0.35;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.3s ease;
+  user-select: none;
 }
 
 .hero-control.prev .hero-arrow { left: 32px; }
 .hero-control.next .hero-arrow { right: 32px; }
 
 .hero-control:hover .hero-arrow { opacity: 1; }
-
-/* =================================================
-   CANVAS / THUMBNAILS
-================================================= */
-.stage { margin-top: 60px; }
-
-.canvas {
-  position: relative;
-  width: 1920px;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-/* 썸네일 공통 */
-.thumb {
-  position: absolute;
-  overflow: hidden;
-}
-
-.thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s ease, opacity 0.6s ease;
-}
-
-/* 썸네일 hover 통일 */
-.thumb:hover img {
-  transform: scale(1.04);
-  opacity: 0.75;
-}
 
 /* =================================================
    SCROLL TO TOP BUTTON
@@ -159,22 +169,84 @@ img {
   bottom: 40px;
   width: 44px;
   height: 44px;
+  border-radius: 999px; /* ✅ 다시 동그랗게 */
   border: 1px solid rgba(255,255,255,0.4);
   background: rgba(0,0,0,0.45);
-  color: #ffffff; /* 화살표 흰색 */
+  color: #ffffff;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
-  transition: background-color 0.25s ease;
+  z-index: 200;
+  transition: background-color 0.3s ease, opacity 0.2s ease;
+  opacity: 0.9;
 }
 
 .scroll-top-btn span {
-  color: #ffffff;
+  color: #ffffff; /* ✅ 화살표 흰색 */
   font-size: 18px;
+  line-height: 1;
 }
 
 .scroll-top-btn:hover {
   background: rgba(255,255,255,0.12);
 }
+
+/* =================================================
+   FOOTER (모든 4개 페이지 공통)
+   ✅ Helvetica Neue Bold, 20pt
+================================================= */
+.site-footer {
+  width: 100%;
+  padding: 80px 0 90px;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 26.67px; /* 20pt ≈ 26.67px */
+  color: rgba(255,255,255,0.8);
+}
+
+/* =================================================
+   MAIN THUMB POSITIONS (29개) - ✅ 윤하님 좌표 반영
+================================================= */
+.main-canvas { height: 9800px; } /* JS가 스케일에 맞춰 stage 높이를 다시 잡아줌 */
+
+/* 1~10 */
+.main-canvas .t01 { left: 602.71px; top: 1298px;   width: 577.61px; height: 786.76px; }
+.main-canvas .t02 { left: 602.71px; top: 2112.54px;width: 577.61px; height: 355.74px; }
+.main-canvas .t03 { left: 1207.28px;top: 2183px;   width: 201.72px; height: 285.32px; }
+.main-canvas .t04 { left: 155px;    top: 2495.71px;width: 284.51px; height: 517.72px; }
+.main-canvas .t05 { left: 465.41px; top: 2495.71px;width: 432.59px; height: 275.74px; }
+.main-canvas .t06 { left: 449px;    top: 2786.66px;width: 449px;    height: 226.28px; }
+.main-canvas .t07 { left: 918px;    top: 2496px;   width: 491.43px; height: 517px; }
+.main-canvas .t08 { left: 1435px;   top: 2496px;   width: 253.63px; height: 177.1px; }
+.main-canvas .t09 { left: 680.5px;  top: 3039px;   width: 217.47px; height: 233px; }
+.main-canvas .t10 { left: 386px;    top: 3298px;   width: 511.83px; height: 427px; }
+
+/* 11~20 */
+.main-canvas .t11 { left: 251.78px; top: 6093px;   width: 621px;    height: 828px; }
+.main-canvas .t12 { left: 918px;    top: 3039px;   width: 491px;    height: 688.41px; }
+.main-canvas .t13 { left: 1435px;   top: 3609.32px;width: 254px;    height: 355.37px; }
+.main-canvas .t14 { left: 670px;    top: 3753px;   width: 739px;    height: 1052.14px; }
+.main-canvas .t15 { left: 1435px;   top: 3985px;   width: 254.04px; height: 363.65px; }
+.main-canvas .t16 { left: 353.43px; top: 4585px;   width: 287.57px; height: 216.75px; }
+.main-canvas .t17 { left: 193px;    top: 4829px;   width: 1219.14px;height: 660.89px; }
+.main-canvas .t18 { left: 1435px;   top: 5247px;   width: 314px;    height: 243.09px; }
+.main-canvas .t19 { left: 432.97px; top: 5514px;   width: 439.03px; height: 554.83px; }
+.main-canvas .t20 { left: 900px;    top: 5514px;   width: 512px;    height: 342.49px; }
+
+/* 21~29 */
+.main-canvas .t21 { left: 918px;    top: 9016px;   width: 252.7px;  height: 319.28px; }
+.main-canvas .t22 { left: 900px;    top: 5881px;   width: 864px;    height: 1040px; }
+.main-canvas .t23 { left: 457px;    top: 6946px;   width: 415.79px; height: 541.52px; }
+.main-canvas .t24 { left: 900.17px; top: 6946px;   width: 452.56px; height: 542.49px; }
+.main-canvas .t25 { left: 647px;    top: 7513px;   width: 452.69px; height: 542.49px; }
+.main-canvas .t26 { left: 898.87px; top: 8076px;   width: 201.23px; height: 242px; }
+.main-canvas .t27 { left: 1112px;   top: 7940px;   width: 256.36px; height: 378.12px; }
+.main-canvas .t28 { left: 1112px;   top: 8334px;   width: 256.24px; height: 363.04px; }
+.main-canvas .t29 { left: 850px;    top: 8679px;   width: 250.11px; height: 319.28px; }
+
+/* =================================================
+   OPTIONAL: SMOOTH RENDERING
+================================================= */
+img { -webkit-user-drag: none; user-select: none; }
