@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>LEE YUNHA – INK PAINTING</title>
 
-  <!-- ✅ index.html이 레포 루트에 있고 css 폴더가 같은 레벨 -->
+  <!-- ✅ 레포 분리(옵션B): 상대경로 -->
   <link rel="stylesheet" href="./css/style.css"/>
 
-  <!-- ✅ 좌표는 윤하님이 준 이전 코드 그대로 -->
+  <!-- ✅ 페이지별 좌표 CSS (canvas height만 최적화해서 footer 위 여백 줄임) -->
   <style>
-    .canvas.ink-canvas{height:8595.0px}
+    /* ✅ 마지막 썸네일(t21) 기준으로 캔버스 높이를 줄여 footer가 과하게 내려가지 않게 조정 */
+    .canvas.ink-canvas{height:7975px}
+
     .ink-canvas .t01{left:45.0px;top:263.0px;width:1428.0px;height:1076.0px;}
     .ink-canvas .t02{left:545.0px;top:1376.0px;width:1310.0px;height:710.0px;}
     .ink-canvas .t03{left:384.0px;top:2123.0px;width:322.245px;height:586.378px;}
@@ -36,6 +38,9 @@
 </head>
 
 <body>
+  <!-- =========================
+       HEADER
+  ========================== -->
   <header class="header">
     <a href="https://jalynneyh.github.io/" class="logo">
       <img
@@ -52,11 +57,17 @@
     </nav>
   </header>
 
+  <!-- =========================
+       PAGE
+  ========================== -->
   <div class="page">
+    <!-- =========================
+         THUMB CANVAS
+    ========================== -->
     <div class="stage section-gap-top">
       <div class="canvas-stage">
         <div class="canvas-wrap">
-          <div class="canvas ink-canvas" data-height="8595">
+          <div class="canvas ink-canvas" data-height="7975">
 
             <a class="thumb t01" href="./detail.html?type=ink&id=1"><img src="./assets/ink/thumb-01.png" alt=""></a>
             <a class="thumb t02" href="./detail.html?type=ink&id=2"><img src="./assets/ink/thumb-02.png" alt=""></a>
@@ -78,6 +89,7 @@
             <a class="thumb t18" href="./detail.html?type=ink&id=18"><img src="./assets/ink/thumb-18.png" alt=""></a>
             <a class="thumb t19" href="./detail.html?type=ink&id=19"><img src="./assets/ink/thumb-19.png" alt=""></a>
             <a class="thumb t20" href="./detail.html?type=ink&id=20"><img src="./assets/ink/thumb-20.png" alt=""></a>
+            <a class="thumb t21" href="./detail.html?type=ink&id=21"><img src="./assets/ink/thumb-21.png" alt=""></a>
 
           </div>
         </div>
@@ -88,6 +100,7 @@
   </div>
 
   <button class="scroll-top-btn" id="scrollTopBtn"><span>&uarr;</span></button>
+
   <script src="./js/app.js"></script>
 </body>
 </html>
