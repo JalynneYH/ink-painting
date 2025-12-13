@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Detail</title>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+
+<body>
+<header class="header">
+  <a href="index.html" class="logo">← BACK</a>
+</header>
+
+<section class="detail-hero">
+  <img id="detailImg" src="" alt="">
+</section>
+
+<div class="detail-body">
+  <div class="detail-text" id="detailText"></div>
+</div>
+
+<script>
+const p = new URLSearchParams(location.search);
+const type = p.get('type');
+const id = p.get('id');
+
+document.getElementById('detailImg').src =
+  `assets/${type}/detail-${id}-01.png`;
+
+document.getElementById('detailText').innerText =
+  "여기에 작품 설명 텍스트를 씁니다.";
+</script>
+</body>
+</html>

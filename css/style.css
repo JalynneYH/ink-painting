@@ -1,0 +1,156 @@
+/* =================================================
+   GLOBAL RESET & BASE
+================================================= */
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; }
+body{
+  background:#111; /* ✅ 부드러운 블랙 통일 */
+  color:#fff;
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow-x:hidden;
+}
+a{ color:inherit; text-decoration:none; }
+img{ -webkit-user-drag:none; user-select:none; }
+
+/* =================================================
+   HEADER / NAV
+================================================= */
+.header{
+  width:100%;
+  height:90px;
+  padding:0 48px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo img{ height:56px; display:block; }
+.nav{ display:flex; gap:28px; }
+.nav a{
+  font-size:12px;
+  letter-spacing:0.08em;
+  color:#8c8c8c;
+}
+.nav a:hover,
+.nav a.active{ color:#fff; }
+
+/* =================================================
+   PAGE
+================================================= */
+.page{ width:100%; }
+
+/* =================================================
+   HERO (MAIN ONLY)
+================================================= */
+.hero{ width:100%; overflow:hidden; }
+.hero-slider{
+  position:relative;
+  height:90vh;
+  min-height:520px;
+}
+.hero .slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+.hero .slide.active{ opacity:1; }
+.hero img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.hero-control{
+  position:absolute;
+  top:0; width:50%; height:100%;
+}
+.hero-control.prev{ left:0; }
+.hero-control.next{ right:0; }
+.hero-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:40px;
+  opacity:0.35;
+}
+.hero-control.prev .hero-arrow{ left:32px; }
+.hero-control.next .hero-arrow{ right:32px; }
+
+/* ✅ 슬라이더와 썸네일 간격 고정 */
+.after-hero-gap{ height:80px; }
+
+/* =================================================
+   CANVAS / THUMBNAILS (옵션 B)
+================================================= */
+.stage{ width:100%; }
+.canvas-wrap{
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+.canvas{
+  position:relative;
+  width:1920px;
+  transform-origin:top left;
+}
+.thumb{
+  position:absolute;
+  overflow:hidden;
+}
+.thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .6s ease, opacity .6s ease;
+}
+.thumb:hover img{
+  transform:scale(1.04);
+  opacity:.75;
+}
+
+/* =================================================
+   FOOTER
+================================================= */
+.footer{
+  text-align:center;
+  font-size:12px;
+  padding:80px 12px 40px; /* ✅ 요청한 위치 */
+}
+
+/* =================================================
+   SCROLL TOP
+================================================= */
+.scroll-top-btn{
+  position:fixed;
+  right:40px;
+  bottom:40px;
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.4);
+  background:rgba(0,0,0,.4);
+  color:#fff;
+}
+
+/* =================================================
+   DETAIL PAGE
+================================================= */
+.detail-hero{
+  position:relative;
+  height:92vh;
+  min-height:520px;
+}
+.detail-hero img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.detail-body{
+  max-width:860px;
+  margin:0 auto;
+  padding:28px 20px;
+}
+.detail-text{
+  font-size:12px;
+  line-height:1.8;
+  white-space:pre-wrap;
+}
