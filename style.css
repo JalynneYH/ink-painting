@@ -1,49 +1,180 @@
+/* =================================================
+   GLOBAL RESET & BASE
+================================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ===== Base ===== */
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#111;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Pretendard",system-ui,sans-serif}
-a{text-decoration:none;color:inherit}
-.header{
-  position:fixed;top:0;left:0;width:100%;
-  padding:20px 40px;display:flex;justify-content:space-between;align-items:center;
-  background:#111;z-index:100;
-}
-.logo img{height:60px;display:block}
-.nav{display:flex;gap:32px;font-size:14px;letter-spacing:.5px}
-.nav a{color:#bcbcbc;transition:color .2s ease}
-.nav a:hover,.nav a.active{color:#fff}
+html, body { width: 100%; }
 
-/* Top hero slider (main only) */
-.hero{margin-top:120px;width:100%;position:relative;overflow:hidden}
-.hero-slider{position:relative;width:100%;height:720px;max-width:1920px;margin:0 auto}
-.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
-.hero-slide.active{opacity:1}
-.hero-slide img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-control{position:absolute;top:0;bottom:0;width:18%;cursor:pointer;z-index:2}
-.hero-control.prev{left:0}.hero-control.next{right:0}
-.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:32px;color:rgba(255,255,255,.7);pointer-events:none}
-.hero-control.prev .hero-arrow{left:20px}
-.hero-control.next .hero-arrow{right:20px}
+body {
+  background: #000;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
 
-/* Canvas scaling wrapper */
-.page-wrapper{padding-top:120px}
-.stage{width:100%;max-width:1920px;margin:0 auto;position:relative}
-.canvas{
-  position:relative;
-  width:1920px; /* design width */
-  transform-origin: top left;
-}
-.thumb{
-  position:absolute;display:block;
-}
-.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+a { color: inherit; text-decoration: none; }
 
-/* Scroll-to-top button */
-.scroll-top-btn{
-  position:fixed;right:24px;bottom:24px;width:40px;height:40px;border-radius:999px;
-  border:1px solid rgba(255,255,255,.5);background:rgba(17,17,17,.7);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;
-  backdrop-filter:blur(6px);transition:background-color .2s ease, transform .15s ease;
+img {
+  -webkit-user-drag: none;
+  user-select: none;
 }
-.scroll-top-btn:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
-.scroll-top-btn span{font-size:18px}
+
+/* =================================================
+   HEADER / NAVIGATION
+================================================= */
+.header {
+  width: 1920px;
+  max-width: 100%;
+  height: 90px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 42px;
+  display: block;
+}
+
+.nav {
+  display: flex;
+  gap: 28px;
+}
+
+.nav a {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #8c8c8c;
+  transition: color 0.25s ease;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: #ffffff;
+}
+
+/* =================================================
+   HERO / SLIDER (메인에서만 사용)
+   - 다른 페이지에 있어도 문제 없게 스타일만 공용으로 둠
+================================================= */
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-slider {
+  position: relative;
+  height: 90vh;
+}
+
+.hero .slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease-in-out; /* 페이드 속도 */
+}
+
+.hero .slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.hero .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 좌우 클릭 영역 */
+.hero-control {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.hero-control.prev { left: 0; }
+.hero-control.next { right: 0; }
+
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  opacity: 0.35;
+  transition: opacity 0.25s ease;
+}
+
+.hero-control.prev .hero-arrow { left: 32px; }
+.hero-control.next .hero-arrow { right: 32px; }
+
+.hero-control:hover .hero-arrow { opacity: 1; }
+
+/* =================================================
+   CANVAS / THUMBNAILS
+================================================= */
+.stage { margin-top: 60px; }
+
+.canvas {
+  position: relative;
+  width: 1920px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* 썸네일 공통 */
+.thumb {
+  position: absolute;
+  overflow: hidden;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+/* 썸네일 hover 통일 */
+.thumb:hover img {
+  transform: scale(1.04);
+  opacity: 0.75;
+}
+
+/* =================================================
+   SCROLL TO TOP BUTTON
+================================================= */
+.scroll-top-btn {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(0,0,0,0.45);
+  color: #ffffff; /* 화살표 흰색 */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: background-color 0.25s ease;
+}
+
+.scroll-top-btn span {
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.scroll-top-btn:hover {
+  background: rgba(255,255,255,0.12);
+}
