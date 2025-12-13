@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>LEE YUNHA – INK PAINTING DETAIL</title>
+  <link rel="stylesheet" href="./css/style.css"/>
+</head>
+
+<body>
+
+<header class="header">
+  <a href="./" class="logo">
+    <img src="https://d2w9rnfcy7mm78.cloudfront.net/41642537/original_749a650870eb16479c7e492221affde4.png" alt="LEE YUNHA Logo">
+  </a>
+  <nav class="nav" id="topNav">
+    <a href="https://jalynneyh.github.io/">MAIN</a>
+    <a href="https://jalynneyh.github.io/design/">DESIGN</a>
+    <a href="https://jalynneyh.github.io/color-painting/">COLOR PAINTING</a>
+    <a href="./">INK PAINTING</a>
+  </nav>
+</header>
+
+<div class="page">
+
+  <section class="detail-hero" id="detailHero">
+    <div class="detail-nav">
+      <div class="detail-btn prev" id="prevBtn">&#10094;</div>
+      <div class="detail-btn next" id="nextBtn">&#10095;</div>
+    </div>
+  </section>
+
+  <div class="detail-body">
+    <div class="detail-meta" id="detailMeta"></div>
+    <div class="detail-text" id="detailText"></div>
+  </div>
+
+  <div class="footer">© 2025 LEE YUNHA. All rights reserved.</div>
+</div>
+
+<button class="scroll-top-btn" id="scrollTopBtn"><span>&uarr;</span></button>
+
+<script>
+/* =================================================
+   INK TEXT DATA
+================================================= */
+const TEXT = {
+  1: {
+    meta: "Ink Painting · 2023",
+    text: `여기에 잉크 1번 작품 설명을 그대로 붙여넣으세요.`
+  }
+};
+
+/* =================================================
+   IMAGE LOAD
+================================================= */
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+
+const hero = document.getElementById("detailHero");
+const metaBox = document.getElementById("detailMeta");
+const textBox = document.getElementById("detailText");
+
+let images = [];
+let index = 0;
+
+let i = 1;
+while (true) {
+  const path = `./assets/detail/ink-${id}-${i}.png`;
+  const img = new Image();
+  img.src = path;
+  img.onload = () => {
+    images.push(path);
+    if (images.length === 1) render();
+  };
+  img.onerror = () => {};
+  i++;
+  if (i > 10) break;
+}
+
+function render() {
+  hero.innerHTML = images.map((src, i) =>
+    `<div class="slide ${i===0?'active':''}"><img src="${src}"></div>`
+  ).join("") + hero.innerHTML;
+}
+
+document.getElementById("nextBtn").onclick = () => change(1);
+document.getElementById("prevBtn").onclick = () => change(-1);
+
+function change(dir){
+  const slides = document.querySelectorAll(".slide");
+  slides[index].classList.remove("active");
+  index = (index + dir + slides.length) % slides.length;
+  slides[index].classList.add("active");
+}
+
+if (TEXT[id]) {
+  metaBox.textContent = TEXT[id].meta;
+  textBox.textContent = TEXT[id].text;
+}
+</script>
+
+<script src="./js/app.js"></script>
+</body>
+</html>
