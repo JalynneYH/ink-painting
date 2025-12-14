@@ -183,7 +183,7 @@ img{ -webkit-user-drag:none; user-select:none; display:block; }
   font-size:12px;
   font-weight:700;
   letter-spacing:0.02em;
-
-  padding-top:24px;   /* 썸네일과 살짝만 */
-  padding-bottom:20px;/* 메인/디자인과 동일 */
+  padding-top:24px;
+  padding-bottom:20px;
 }
+
