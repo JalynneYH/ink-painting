@@ -192,3 +192,19 @@ img{ -webkit-user-drag:none; user-select:none; display:block; }
   margin:0;                       /* 혹시 모를 margin 제거 */
 }
 
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* 네비를 왼쪽으로 */
+.nav{
+  order:1;
+}
+
+/* BACK 버튼을 오른쪽으로 */
+.back-link{
+  order:2;
+}
+
