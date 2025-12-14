@@ -180,10 +180,15 @@ img{ -webkit-user-drag:none; user-select:none; display:block; }
 .footer{
   text-align:center;
   color:#fff;
-  font-size:12px;
-  font-weight:700;
+  font-size:12px;                 /* 네비바 수준 */
   letter-spacing:0.02em;
-  padding-top:24px;
-  padding-bottom:20px;
+  font-weight:700;
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height:1.4;
+
+  /* ✅ 썸네일 끝과의 간격(위) / 문구 아래 간격(아래) */
+  padding-top:40px;               /* 문구 위 간격 */
+  padding-bottom:40px;            /* ✅ 문구 아래 빈공간 최소 */
+  margin:0;                       /* 혹시 모를 margin 제거 */
 }
 

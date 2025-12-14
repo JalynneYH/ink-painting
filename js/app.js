@@ -44,23 +44,57 @@ window.addEventListener("load", applyCanvasScale);
 window.addEventListener("resize", applyCanvasScale);
 
 /* =================================================
-   NAV ACTIVE AUTO (있으면 유지)
+   NAV ACTIVE AUTO (메인 '/' 오작동 수정 버전)
+   - '/'(메인)은 오직 홈에서만 active
+   - 나머지는 정확히 같은 폴더 경로로 매칭
 ================================================= */
-(function(){
+(function () {
   const nav = document.getElementById("topNav");
-  if(!nav) return;
+  if (!nav) return;
 
-  const links = nav.querySelectorAll("a");
-  const here = location.href.replace(/\/+$/,"");
+  const links = Array.from(nav.querySelectorAll("a"));
 
+  // 현재 페이지의 pathname (끝 슬래시 정리)
+  const herePath = location.pathname.replace(/\/+$/, "") || "/";
+
+  // 모두 active 제거
   links.forEach(a => a.classList.remove("active"));
-  links.forEach(a => {
-    const href = a.href.replace(/\/+$/,"");
-    if (here === href || (href !== a.origin + "/" && here.startsWith(href))) {
-      a.classList.add("active");
+
+  // 링크들 중 현재 경로와 가장 잘 맞는 것 찾기
+  // 규칙:
+  // 1) 메인('/')은 herePath가 '/'일 때만 active
+  // 2) 그 외는 "정확히 같은 경로"면 active
+  // 3) (옵션) detail.html 같은 경우 type에 따라 상단 메뉴를 잡고 싶으면 아래 블록 참고
+  let matched = null;
+
+  for (const a of links) {
+    const url = new URL(a.href, location.origin);
+    const linkPath = url.pathname.replace(/\/+$/, "") || "/";
+
+    if (linkPath === "/") {
+      if (herePath === "/") matched = a;  // ✅ 홈에서만 MAIN active
+      continue;
     }
-  });
+
+    if (herePath === linkPath) {
+      matched = a;
+      break;
+    }
+  }
+
+  // (옵션) detail.html에서 type 파라미터로 메뉴 활성화하고 싶을 때
+  // - 원치 않으면 아래 블록은 그대로 둬도 문제 없습니다.
+  if (!matched && herePath.endsWith("/detail.html")) {
+    const type = new URLSearchParams(location.search).get("type");
+    if (type === "design") matched = links.find(a => a.href.includes("/design/"));
+    if (type === "color") matched = links.find(a => a.href.includes("/color-painting/"));
+    if (type === "ink") matched = links.find(a => a.href.includes("/ink-painting/"));
+    if (type === "main") matched = links.find(a => new URL(a.href).pathname === "/");
+  }
+
+  if (matched) matched.classList.add("active");
 })();
+
 
 /* =================================================
    SCROLL TO TOP
