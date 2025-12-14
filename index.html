@@ -8,35 +8,34 @@
   <!-- ✅ 레포 분리(옵션B): 상대경로 -->
   <link rel="stylesheet" href="./css/style.css"/>
 
-  <!-- ✅ 페이지별 좌표 CSS (canvas height만 최적화해서 footer 위 여백 줄임) -->
+  <!-- ✅ 페이지별 좌표 CSS -->
   <style>
-  .canvas.ink-canvas{
-    height:8250px; /* 메인 페이지와 동일한 footer 간격 */
-  }
+    .canvas.ink-canvas{
+      height:8600px; /* 마지막 썸네일 바로 아래에서 footer 종료 */
+    }
 
-  .ink-canvas .t01{left:45.0px;top:263.0px;width:1428.0px;height:1076.0px;}
-  .ink-canvas .t02{left:545.0px;top:1376.0px;width:1310.0px;height:710.0px;}
-  .ink-canvas .t03{left:384.0px;top:2123.0px;width:322.245px;height:586.378px;}
-  .ink-canvas .t04{left:760.0px;top:2746.0px;width:439.783px;height:586.378px;}
-  .ink-canvas .t05{left:113.0px;top:3369.0px;width:1087.0px;height:548.0px;}
-  .ink-canvas .t06{left:1228.0px;top:3955.0px;width:627.0px;height:877.221px;}
-  .ink-canvas .t07{left:1228.0px;top:3643.0px;width:255.738px;height:274.0px;}
-  .ink-canvas .t08{left:706.0px;top:4449.65px;width:493.973px;height:382.419px;}
-  .ink-canvas .t09{left:1542.0px;top:4872.0px;width:313.393px;height:400.768px;}
-  .ink-canvas .t10{left:1149.0px;top:5313.0px;width:392.821px;height:293.657px;}
-  .ink-canvas .t11{left:980.0px;top:5066.67px;width:295.631px;height:206.422px;}
-  .ink-canvas .t12{left:657.0px;top:5607.0px;width:452.218px;height:575.244px;}
-  .ink-canvas .t13{left:1149.0px;top:6231.0px;width:262.794px;height:180.093px;}
-  .ink-canvas .t14{left:258.0px;top:6503.0px;width:695.0px;height:496.477px;}
-  .ink-canvas .t15{left:980.0px;top:6800.0px;width:175.915px;height:198.717px;}
-  .ink-canvas .t16{left:980.0px;top:7031.0px;width:268.363px;height:198.717px;}
-  .ink-canvas .t17{left:685.0px;top:7267.0px;width:268.363px;height:184.172px;}
-  .ink-canvas .t18{left:1587.0px;top:7543.0px;width:268.363px;height:177.096px;}
-  .ink-canvas .t19{left:113.0px;top:8069.0px;width:261.027px;height:184.172px;}
-  .ink-canvas .t20{left:366.621px;top:8070.57px;width:268.363px;height:181.027px;}
-  .ink-canvas .t21{left:1706.64px;top:7791.0px;width:148.0px;height:106.0px;}
-</style>
-
+    .ink-canvas .t01{left:45px;top:263px;width:1428px;height:1076px;}
+    .ink-canvas .t02{left:545px;top:1376px;width:1310px;height:710px;}
+    .ink-canvas .t03{left:384px;top:2123px;width:322.245px;height:586.378px;}
+    .ink-canvas .t04{left:760px;top:2746px;width:439.783px;height:586.378px;}
+    .ink-canvas .t05{left:113px;top:3369px;width:1087px;height:548px;}
+    .ink-canvas .t06{left:1228px;top:3955px;width:627px;height:877.221px;}
+    .ink-canvas .t07{left:1228px;top:3643px;width:255.738px;height:274px;}
+    .ink-canvas .t08{left:706px;top:4449.65px;width:493.973px;height:382.419px;}
+    .ink-canvas .t09{left:1542px;top:4872px;width:313.393px;height:400.768px;}
+    .ink-canvas .t10{left:1149px;top:5313px;width:392.821px;height:293.657px;}
+    .ink-canvas .t11{left:980px;top:5066.67px;width:295.631px;height:206.422px;}
+    .ink-canvas .t12{left:657px;top:5607px;width:452.218px;height:575.244px;}
+    .ink-canvas .t13{left:1149px;top:6231px;width:262.794px;height:180.093px;}
+    .ink-canvas .t14{left:258px;top:6503px;width:695px;height:496.477px;}
+    .ink-canvas .t15{left:980px;top:6800px;width:175.915px;height:198.717px;}
+    .ink-canvas .t16{left:980px;top:7031px;width:268.363px;height:198.717px;}
+    .ink-canvas .t17{left:685px;top:7267px;width:268.363px;height:184.172px;}
+    .ink-canvas .t18{left:1587px;top:7543px;width:268.363px;height:177.096px;}
+    .ink-canvas .t19{left:113px;top:8069px;width:261.027px;height:184.172px;}
+    .ink-canvas .t20{left:366.621px;top:8070.57px;width:268.363px;height:181.027px;}
+    .ink-canvas .t21{left:1706.64px;top:7791px;width:148px;height:106px;}
+  </style>
 </head>
 
 <body>
@@ -63,35 +62,34 @@
        PAGE
   ========================== -->
   <div class="page">
-    <!-- =========================
-         THUMB CANVAS
-    ========================== -->
     <div class="stage section-gap-top">
       <div class="canvas-stage">
         <div class="canvas-wrap">
-          <div class="canvas ink-canvas" data-height="7975">
+          <!-- ✅ data-height = CSS height -->
+          <div class="canvas ink-canvas" data-height="8600">
 
-            <a class="thumb t01" href="./detail.html?type=ink&id=1"><img src="./assets/ink/thumb-01.png" alt=""></a>
-            <a class="thumb t02" href="./detail.html?type=ink&id=2"><img src="./assets/ink/thumb-02.png" alt=""></a>
-            <a class="thumb t03" href="./detail.html?type=ink&id=3"><img src="./assets/ink/thumb-03.png" alt=""></a>
-            <a class="thumb t04" href="./detail.html?type=ink&id=4"><img src="./assets/ink/thumb-04.png" alt=""></a>
-            <a class="thumb t05" href="./detail.html?type=ink&id=5"><img src="./assets/ink/thumb-05.png" alt=""></a>
-            <a class="thumb t06" href="./detail.html?type=ink&id=6"><img src="./assets/ink/thumb-06.png" alt=""></a>
-            <a class="thumb t07" href="./detail.html?type=ink&id=7"><img src="./assets/ink/thumb-07.png" alt=""></a>
-            <a class="thumb t08" href="./detail.html?type=ink&id=8"><img src="./assets/ink/thumb-08.png" alt=""></a>
-            <a class="thumb t09" href="./detail.html?type=ink&id=9"><img src="./assets/ink/thumb-09.png" alt=""></a>
-            <a class="thumb t10" href="./detail.html?type=ink&id=10"><img src="./assets/ink/thumb-10.png" alt=""></a>
-            <a class="thumb t11" href="./detail.html?type=ink&id=11"><img src="./assets/ink/thumb-11.png" alt=""></a>
-            <a class="thumb t12" href="./detail.html?type=ink&id=12"><img src="./assets/ink/thumb-12.png" alt=""></a>
-            <a class="thumb t13" href="./detail.html?type=ink&id=13"><img src="./assets/ink/thumb-13.png" alt=""></a>
-            <a class="thumb t14" href="./detail.html?type=ink&id=14"><img src="./assets/ink/thumb-14.png" alt=""></a>
-            <a class="thumb t15" href="./detail.html?type=ink&id=15"><img src="./assets/ink/thumb-15.png" alt=""></a>
-            <a class="thumb t16" href="./detail.html?type=ink&id=16"><img src="./assets/ink/thumb-16.png" alt=""></a>
-            <a class="thumb t17" href="./detail.html?type=ink&id=17"><img src="./assets/ink/thumb-17.png" alt=""></a>
-            <a class="thumb t18" href="./detail.html?type=ink&id=18"><img src="./assets/ink/thumb-18.png" alt=""></a>
-            <a class="thumb t19" href="./detail.html?type=ink&id=19"><img src="./assets/ink/thumb-19.png" alt=""></a>
-            <a class="thumb t20" href="./detail.html?type=ink&id=20"><img src="./assets/ink/thumb-20.png" alt=""></a>
-            <a class="thumb t21" href="./detail.html?type=ink&id=21"><img src="./assets/ink/thumb-21.png" alt=""></a>
+            <!-- ✅ 썸네일 → 잉크 레포 루트 detail.html -->
+            <a class="thumb t01" href="./detail.html?id=1"><img src="./assets/ink/thumb-01.png" alt=""></a>
+            <a class="thumb t02" href="./detail.html?id=2"><img src="./assets/ink/thumb-02.png" alt=""></a>
+            <a class="thumb t03" href="./detail.html?id=3"><img src="./assets/ink/thumb-03.png" alt=""></a>
+            <a class="thumb t04" href="./detail.html?id=4"><img src="./assets/ink/thumb-04.png" alt=""></a>
+            <a class="thumb t05" href="./detail.html?id=5"><img src="./assets/ink/thumb-05.png" alt=""></a>
+            <a class="thumb t06" href="./detail.html?id=6"><img src="./assets/ink/thumb-06.png" alt=""></a>
+            <a class="thumb t07" href="./detail.html?id=7"><img src="./assets/ink/thumb-07.png" alt=""></a>
+            <a class="thumb t08" href="./detail.html?id=8"><img src="./assets/ink/thumb-08.png" alt=""></a>
+            <a class="thumb t09" href="./detail.html?id=9"><img src="./assets/ink/thumb-09.png" alt=""></a>
+            <a class="thumb t10" href="./detail.html?id=10"><img src="./assets/ink/thumb-10.png" alt=""></a>
+            <a class="thumb t11" href="./detail.html?id=11"><img src="./assets/ink/thumb-11.png" alt=""></a>
+            <a class="thumb t12" href="./detail.html?id=12"><img src="./assets/ink/thumb-12.png" alt=""></a>
+            <a class="thumb t13" href="./detail.html?id=13"><img src="./assets/ink/thumb-13.png" alt=""></a>
+            <a class="thumb t14" href="./detail.html?id=14"><img src="./assets/ink/thumb-14.png" alt=""></a>
+            <a class="thumb t15" href="./detail.html?id=15"><img src="./assets/ink/thumb-15.png" alt=""></a>
+            <a class="thumb t16" href="./detail.html?id=16"><img src="./assets/ink/thumb-16.png" alt=""></a>
+            <a class="thumb t17" href="./detail.html?id=17"><img src="./assets/ink/thumb-17.png" alt=""></a>
+            <a class="thumb t18" href="./detail.html?id=18"><img src="./assets/ink/thumb-18.png" alt=""></a>
+            <a class="thumb t19" href="./detail.html?id=19"><img src="./assets/ink/thumb-19.png" alt=""></a>
+            <a class="thumb t20" href="./detail.html?id=20"><img src="./assets/ink/thumb-20.png" alt=""></a>
+            <a class="thumb t21" href="./detail.html?id=21"><img src="./assets/ink/thumb-21.png" alt=""></a>
 
           </div>
         </div>
