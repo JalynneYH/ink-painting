@@ -65,12 +65,12 @@
       font-size:12px;
       font-weight:700;
       opacity:0.95;
-      margin-top:4px;   /* ✅ 이미지 바로 밑으로(기존 10px → 4px) */
+      margin-top:4px;   /* ✅ 이미지 바로 밑 */
       line-height:1.5;
     }
 
     .detail-text{
-      margin-top:28px;
+      margin-top:6px;   /* ✅ (기존 28px) -> 캡션 바로 아래로 붙이기 */
       font-size:14px;
       line-height:1.9;
       opacity:0.9;
@@ -81,25 +81,63 @@
       height:240px;
     }
 
-    .back-link{
-      font-size:12px;
-      letter-spacing:.08em;
-      color:#fff;
-      font-weight:700;
+    /* ✅ BACK 아이콘 버튼 */
+    .back-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:40px;
+      height:40px;
+      border-radius:9999px;
+      background:transparent;
+      border:0;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
+    .back-btn img{
+      width:24px;
+      height:24px;
+      display:block;
+      transform:translateX(0);
+      transition: transform .2s ease, opacity .2s ease;
+      opacity:0.9;
+    }
+    .back-btn:hover img{
+      transform:translateX(-4px);
+      opacity:1;
+    }
+    .back-btn:active img{
+      transform:translateX(-6px) scale(0.98);
+    }
+
+    /* ✅ 헤더 배치: 네비 왼쪽 / 백버튼 오른쪽 */
+    .header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .nav{ order:1; }
+    .back-area{ order:2; }
   </style>
 </head>
 
 <body>
 <header class="header">
-  <a href="./index.html" class="logo back-link">BACK</a>
-
   <nav class="nav" id="topNav">
     <a href="https://jalynneyh.github.io/">MAIN</a>
     <a href="https://jalynneyh.github.io/design/">DESIGN</a>
     <a href="https://jalynneyh.github.io/color-painting/">COLOR PAINTING</a>
     <a href="https://jalynneyh.github.io/ink-painting/" class="active">INK PAINTING</a>
   </nav>
+
+  <!-- ✅ BACK (아이콘) -->
+  <div class="back-area">
+    <button class="back-btn" id="backBtn" aria-label="Back">
+      <!-- ✅ 윤하님이 주신 아이콘으로 교체 -->
+      <img src="./assets/ui/arrow-back.svg" alt="">
+    </button>
+  </div>
 </header>
 
 <section class="detail-hero" id="detailHero">
@@ -123,6 +161,26 @@
 
 <script src="./js/app.js"></script>
 <script>
+/* =================================================
+   ✅ BACK 동작:
+   - from=main 이면: 메인으로
+   - 아니면: 잉크 목록(index)으로
+================================================= */
+(function(){
+  const p = new URLSearchParams(location.search);
+  const from = p.get("from");
+  const backBtn = document.getElementById("backBtn");
+  if(!backBtn) return;
+
+  backBtn.addEventListener("click", () => {
+    if (from === "main") {
+      location.href = "https://jalynneyh.github.io/";
+    } else {
+      location.href = "./index.html";
+    }
+  });
+})();
+
 /* =================================================
    ✅ 잉크 데이터 (1~20)
 ================================================= */
