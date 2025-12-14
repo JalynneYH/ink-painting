@@ -3,103 +3,288 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>LEE YUNHA – INK PAINTING DETAIL</title>
+  <title>LEE YUNHA – INK DETAIL</title>
   <link rel="stylesheet" href="./css/style.css"/>
+
+  <style>
+    .detail-hero{
+      position:relative;
+      width:100%;
+      height:92vh;
+      min-height:520px;
+      overflow:hidden;
+      background:#0b0b0b;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .dslide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transition: opacity .9s ease-in-out;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+    }
+    .dslide.active{ opacity:1; pointer-events:auto; }
+    .dslide img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+
+    .detail-btn{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      font-size:44px;
+      color:#fff;
+      opacity:0.7;
+      cursor:pointer;
+      padding:12px;
+      z-index:30;
+      user-select:none;
+    }
+    .detail-btn:hover{ opacity:1; }
+    .detail-btn.prev{ left:18px; }
+    .detail-btn.next{ right:18px; }
+
+    .detail-body{
+      max-width:860px;
+      margin:0 auto;
+      padding:22px 20px 0;
+    }
+
+    .caption-wrap{ width:100%; }
+    .caption-inner{ }
+
+    .detail-caption{
+      font-size:12px;
+      font-weight:700;
+      opacity:0.95;
+      margin-top:4px;   /* ✅ 이미지 바로 밑으로(기존 10px → 4px) */
+      line-height:1.5;
+    }
+
+    .detail-text{
+      margin-top:28px;
+      font-size:14px;
+      line-height:1.9;
+      opacity:0.9;
+      white-space:pre-wrap;
+    }
+
+    .detail-spacer{
+      height:240px;
+    }
+
+    .back-link{
+      font-size:12px;
+      letter-spacing:.08em;
+      color:#fff;
+      font-weight:700;
+    }
+  </style>
 </head>
 
 <body>
-
 <header class="header">
-  <a href="./" class="logo">
-    <img src="https://d2w9rnfcy7mm78.cloudfront.net/41642537/original_749a650870eb16479c7e492221affde4.png" alt="LEE YUNHA Logo">
-  </a>
+  <a href="./index.html" class="logo back-link">BACK</a>
+
   <nav class="nav" id="topNav">
     <a href="https://jalynneyh.github.io/">MAIN</a>
     <a href="https://jalynneyh.github.io/design/">DESIGN</a>
     <a href="https://jalynneyh.github.io/color-painting/">COLOR PAINTING</a>
-    <a href="./">INK PAINTING</a>
+    <a href="https://jalynneyh.github.io/ink-painting/" class="active">INK PAINTING</a>
   </nav>
 </header>
 
-<div class="page">
+<section class="detail-hero" id="detailHero">
+  <div class="detail-btn prev" id="dPrev">&#10094;</div>
+  <div class="detail-btn next" id="dNext">&#10095;</div>
+</section>
 
-  <section class="detail-hero" id="detailHero">
-    <div class="detail-nav">
-      <div class="detail-btn prev" id="prevBtn">&#10094;</div>
-      <div class="detail-btn next" id="nextBtn">&#10095;</div>
+<div class="detail-body">
+  <div class="caption-wrap">
+    <div class="caption-inner" id="captionInner">
+      <div class="detail-caption" id="detailCaption"></div>
     </div>
-  </section>
-
-  <div class="detail-body">
-    <div class="detail-meta" id="detailMeta"></div>
-    <div class="detail-text" id="detailText"></div>
   </div>
 
-  <div class="footer">© 2025 LEE YUNHA. All rights reserved.</div>
+  <div class="detail-text" id="detailText"></div>
+  <div class="detail-spacer"></div>
 </div>
 
+<div class="footer">© 2025 LEE YUNHA. All rights reserved.</div>
 <button class="scroll-top-btn" id="scrollTopBtn"><span>&uarr;</span></button>
 
+<script src="./js/app.js"></script>
 <script>
 /* =================================================
-   INK TEXT DATA
+   ✅ 잉크 데이터 (1~20)
 ================================================= */
-const TEXT = {
-  1: {
-    meta: "Ink Painting · 2023",
-    text: `여기에 잉크 1번 작품 설명을 그대로 붙여넣으세요.`
+const INK_DATA = {
+  "1": { caption: "휩쓸림, 2023, 순지에 먹",
+    desc: `쓸어간 것은 무엇이었을까?`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798668/original_7de519dd3d5d9f7a62b092ef41292052.png?1765736904?bc=0"]
+  },
+  "2": { caption: "쓸어간 자리, 2023, 순지에 먹",
+    desc: `모래 혹은 물 위의 잔상.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798667/original_837c13ffd112fc89e14cc5e62d61c18a.png?1765736903?bc=0"]
+  },
+  "3": { caption: "머리 위, 2023, 연선지에 먹",
+    desc: `뻗쳐있는 가지의 형태가 재미있다.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798669/original_8dbac3de5fda92dd4ba5729faa5ef364.png?1765736906?bc=0"]
+  },
+  "4": { caption: "바람의 향, 2022, 순지에 먹",
+    desc: `새벽 아침의 향은 다르다.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798664/original_3f918903a0580b44d2b7c49470950a79.png?1765736899?bc=0"]
+  },
+  "5": { caption: "정적 속 멈춤, 2023, 순지에 먹",
+    desc: `멈춰 있는 풍경 속 무언가.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798666/original_77188669bba99027d9b92935db78ad19.png?1765736900?bc=0"]
+  },
+  "6": { caption: "교차점, 2023, 순지에 먹",
+    desc: `지나가는 기차 밖의 풍경을 보고 교차되는 것들에 대해 떠올렸다.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798665/original_fe96400d756ef9e2ffbf136ca1b99d76.png?1765736900?bc=0"]
+  },
+  "7": { caption: "연결, 2023, 순지에 먹",
+    desc: `끝없이 사람은 연결된다.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798671/original_eb2e138afffa50f1ccab931c2289b661.png?1765736907?bc=0"]
+  },
+  "8": { caption: "새벽, 2023, 순지에 먹",
+    desc: `한강변의 풍경.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798674/original_0b7dec9b7775fc9a89c6a622a295cc43.png?1765736911?bc=0"]
+  },
+  "9": { caption: "부서지고 물들다, 2023, 순지에 먹",
+    desc: `부서지는 것은 파도일까.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798672/original_421ae9f51c60fc0319185ffa2fce883d.png?1765736909?bc=0"]
+  },
+  "10": { caption: "윤슬, 2023, 순지에 먹",
+    desc: `빛나는 것들의 집합.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798676/original_cfef6694a0b83de65d61fb93159fff7e.png?1765736912?bc=0"]
+  },
+  "11": { caption: "고요, 2023, 순지에 먹",
+    desc: `외주용 그림 소스로 제작.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798678/original_ac99231e5f364ee55a6bbbb830663eab.png?1765736916?bc=0"]
+  },
+  "12": { caption: "틈, 2023, 순지에 먹",
+    desc: `습작.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798673/original_4623aa7719b35bec6a6f70f20eb970fe.png?1765736909?bc=0"]
+  },
+  "13": { caption: "바위, 2023, 순지에 먹",
+    desc: `습작.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798680/original_baf2417f49225ee3203088ebb945dbe9.png?1765736918?bc=0"]
+  },
+  "14": { caption: "자유 아닌 자유, 2023, 순지에 먹",
+    desc: `습작. 경복궁 뒤에 솟은 바위.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798681/original_6814326f5daa7b4476f1dab9b70f0fd8.png?1765736922?bc=0"]
+  },
+  "15": { caption: "연결점, 2023, 순지에 먹",
+    desc: `어딘가는 또 다른 곳과 이어져 있다.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798679/original_f3cc19e2e6f52e92d900a47988bbe8cd.png?1765736917?bc=0"]
+  },
+  "16": { caption: "바위 하나 둘 셋, 2023, 순지에 먹",
+    desc: `습작.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798684/original_f0e732d3a88d382f0385fe9a88476f87.png?1765736924?bc=0"]
+  },
+  "17": { caption: "침묵 속 안개, 2023, 순지에 먹",
+    desc: `습작.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798688/original_5ea37e3d912cdf303b49afd72fd1a1b7.png?1765736927?bc=0"]
+  },
+  "18": { caption: "일렁이다, 2023, 순지에 먹",
+    desc: `습작 스케치. 세로선만으로 표현.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798685/original_e2eca8b93a25d1be5aa744b1b7bb3661.png?1765736926?bc=0"]
+  },
+  "19": { caption: "만의 잔상, 2023, 순지에 먹",
+    desc: `습작.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798687/original_ceff1d8f8304cb32bbba4d535a983c29.png?1765736926?bc=0"]
+  },
+  "20": { caption: "메마르고 우거진, 2023, 순지에 먹",
+    desc: `습작.`,
+    urls: ["https://d2w9rnfcy7mm78.cloudfront.net/41798689/original_1dca1edf472e935479ec98be081fa1a9.png?1765736928?bc=0"]
   }
 };
 
-/* =================================================
-   IMAGE LOAD
-================================================= */
-const params = new URLSearchParams(location.search);
-const id = params.get("id");
+/* ✅ id만 사용 */
+const p = new URLSearchParams(location.search);
+const id = p.get("id") || "1";
+const data = INK_DATA[id] || { caption: "", desc: "", urls: [] };
 
+document.getElementById("detailCaption").innerText = data.caption || "";
+
+const textEl = document.getElementById("detailText");
+if (data.desc && data.desc.trim().length){
+  textEl.innerText = data.desc;
+  textEl.style.display = "block";
+} else {
+  textEl.style.display = "none";
+}
+
+/* ✅ 슬라이드 생성 */
 const hero = document.getElementById("detailHero");
-const metaBox = document.getElementById("detailMeta");
-const textBox = document.getElementById("detailText");
+let slides = [];
+let idx = 0;
 
-let images = [];
-let index = 0;
+const urls = Array.isArray(data.urls) ? data.urls : [];
+urls.forEach((src, i) => {
+  const el = document.createElement("div");
+  el.className = "dslide" + (i===0 ? " active" : "");
+  el.innerHTML = `<img src="${src}" alt="">`;
+  hero.appendChild(el);
+  slides.push(el);
+});
 
-let i = 1;
-while (true) {
-  const path = `./assets/detail/ink-${id}-${i}.png`;
-  const img = new Image();
-  img.src = path;
-  img.onload = () => {
-    images.push(path);
-    if (images.length === 1) render();
-  };
-  img.onerror = () => {};
-  i++;
-  if (i > 10) break;
+function show(i){
+  slides.forEach(s=>s.classList.remove("active"));
+  slides[i].classList.add("active");
+  alignCaptionToImage();
 }
 
-function render() {
-  hero.innerHTML = images.map((src, i) =>
-    `<div class="slide ${i===0?'active':''}"><img src="${src}"></div>`
-  ).join("") + hero.innerHTML;
+const prev = document.getElementById("dPrev");
+const next = document.getElementById("dNext");
+
+function hasMulti(){ return slides.length > 1; }
+prev.style.display = hasMulti() ? "block" : "none";
+next.style.display = hasMulti() ? "block" : "none";
+
+prev.addEventListener("click", ()=>{
+  if(!hasMulti()) return;
+  idx = (idx - 1 + slides.length) % slides.length;
+  show(idx);
+});
+next.addEventListener("click", ()=>{
+  if(!hasMulti()) return;
+  idx = (idx + 1) % slides.length;
+  show(idx);
+});
+
+/* ✅ 캡션을 “현재 보이는 이미지의 왼쪽 끝”에 맞추기 */
+function alignCaptionToImage(){
+  const active = hero.querySelector(".dslide.active img");
+  const inner = document.getElementById("captionInner");
+  if(!active || !inner) return;
+
+  if(!active.complete || active.naturalWidth === 0){
+    setTimeout(alignCaptionToImage, 80);
+    return;
+  }
+
+  const heroRect = hero.getBoundingClientRect();
+  const imgRect  = active.getBoundingClientRect();
+
+  const left = Math.max(0, imgRect.left - heroRect.left);
+  const width = Math.max(0, imgRect.width);
+
+  inner.style.marginLeft = left + "px";
+  inner.style.width = width + "px";
 }
 
-document.getElementById("nextBtn").onclick = () => change(1);
-document.getElementById("prevBtn").onclick = () => change(-1);
-
-function change(dir){
-  const slides = document.querySelectorAll(".slide");
-  slides[index].classList.remove("active");
-  index = (index + dir + slides.length) % slides.length;
-  slides[index].classList.add("active");
-}
-
-if (TEXT[id]) {
-  metaBox.textContent = TEXT[id].meta;
-  textBox.textContent = TEXT[id].text;
-}
+window.addEventListener("load", alignCaptionToImage);
+window.addEventListener("resize", alignCaptionToImage);
 </script>
-
-<script src="./js/app.js"></script>
 </body>
 </html>
