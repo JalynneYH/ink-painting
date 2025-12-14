@@ -181,12 +181,9 @@ img{ -webkit-user-drag:none; user-select:none; display:block; }
   text-align:center;
   color:#fff;
   font-size:12px;
-  letter-spacing:0.02em;
   font-weight:700;
-  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing:0.02em;
 
-  /* ✅ 썸네일 끝과 살짝만 띄우고 */
-  padding-top:28px;
-  /* ✅ 아래는 조금만 남기고 끝 */
-  padding-bottom:18px;
+  padding-top:24px;   /* 썸네일과 살짝만 */
+  padding-bottom:20px;/* 메인/디자인과 동일 */
 }
